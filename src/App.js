@@ -23,7 +23,7 @@ class App extends Component {
 
   showFavorites = () => {
     if (localStorage.getItem('favorites')){
-    this.getFavorites()
+      this.getFavorites()
   } else {
       return null
    }

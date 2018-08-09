@@ -2,7 +2,7 @@ import React from 'react';
 
 const Favorites = (props) => {
   return(
-    <h4><a href={props.favorite.link}>{props.favorite.name}</a></h4>
+    <h4><a href={props.favorite.link} target="_blank">{props.favorite.name}</a></h4>
     )
 }
 

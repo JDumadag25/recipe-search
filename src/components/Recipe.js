@@ -18,7 +18,7 @@ class Recipe extends Component{
   render(){
     return(
       <div className="recipe-component">
-        <h3 id="title"><a href={this.props.results.href}>{this.props.results.title}</a></h3>
+        <h3 id="title"><a href={this.props.results.href} target="_blank">{this.props.results.title}</a></h3>
         <img src={this.props.results.thumbnail} alt='' width="200" height="100"/>
         <br></br>
         Ingredients: {this.props.results.ingredients}

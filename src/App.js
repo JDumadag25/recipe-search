@@ -4,6 +4,7 @@ import './App.css';
 import SearchBar from './components/SearchBar'
 import KeywordBar from './components/KeywordBar'
 import Recipe from './components/Recipe'
+import Favorites from './components/Favorites'
 
 class App extends Component {
 
@@ -16,6 +17,16 @@ class App extends Component {
     query: '',
     keyword: '',
     results: [],
+    favorites: [],
+
+  }
+
+  showFavorites = () => {
+    if (localStorage.getItem('favorites')){
+    this.getFavorites()
+  } else {
+      return null
+   }
   }
 
   handleSearch = (e) => {
@@ -28,7 +39,6 @@ class App extends Component {
     this.search()
   }
 
-
   search = () => {
     this.setState({results:[]})
     console.log("Hit API");
@@ -37,23 +47,31 @@ class App extends Component {
       .then(res => this.setState({results: res.results}))
    }
 
-
-
+   getFavorites = () => {
+     let allfaves = JSON.parse(localStorage.getItem('favorites'))
+     this.setState({favorites: allfaves})
+   }
 
   render() {
-    console.log(this.state);
     const recipes = this.state.results.map(result => {
       return <Recipe results={result} key={result.title}/>
+    })
+    const faveddish = this.state.favorites.map(favorite => {
+      return <Favorites favorite={favorite}/>
     })
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">CHEFit</h1>
+          <button onClick={this.showFavorites}>Show Favorites</button>
         </header>
         <SearchBar handleSearch={this.handleSearch}/>
         -OR-
         <KeywordBar handleKeyword={this.handleKeyword}/>
-        {this.state.results.length > 0 ? recipes : "No recipes found"}
+        {this.state.results.length > 1 ? recipes : "No recipes found"}
+        <br></br>
+        FAVORITES
+        {faveddish}
       </div>
     );
   }

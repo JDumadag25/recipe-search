@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 class Recipe extends Component{
 
   save = (e) => {
-    console.log(e.target.value);
     let recipeName = e.target.value
     let recipeLink = e.target.id
     let existingFavorites = JSON.parse(localStorage.getItem("favorites") || "[]")
